@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isBackShow"
+            type="java.lang.Boolean" />
+
+
+        <variable
+            name="isSettingShow"
+            type="java.lang.Boolean" />
+
+
+        <variable
+            name="isLayoutShow"
+            type="java.lang.Boolean" />
+
+        <variable
+            name="isTextShow"
+            type="java.lang.Boolean" />
+
+        <variable
+            name="isEditShow"
+            type="java.lang.Boolean" />
+
+        <variable
+            name="isCenterTextShow"
+            type="java.lang.Boolean" />
+
+        <variable
+            name="isAddFriendShow"
+            type="java.lang.Boolean" />
+
+        <variable
+            name="isBackRoundedShow"
+            type="java.lang.Boolean" />
+
+        <variable
+            name="isStartTextShow"
+            type="java.lang.Boolean" />
+
+        <variable
+            name="isStartText1Show"
+            type="java.lang.Boolean" />
+
+        <variable
+            name="isHeadPhonesShow"
+            type="java.lang.Boolean" />
+
+        <variable
+            name="topBarClickListener"
+            type="com.firebaseexample.interfaces.TopBarClickListener" />
+
+
+    </data>
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@color/white"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            app:layout_collapseMode="pin"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/Theme.AppCompat.Light.DarkActionBar"
+            app:theme="@style/ToolbarTheme">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/navImg"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_17sdp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@null"
+                        android:onClick="@{(v)->topBarClickListener.onTopBarClickListener(v,@string/menu)}"
+                        android:src="@drawable/ic_launcher_foreground" />
+
+                    <com.firebaseexample.custom.CTextView
+                        style="@style/txt_000_8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/_4sdp"
+                        android:gravity="start|center_vertical"
+                        android:singleLine="true"
+                        android:text="@string/welcome" />
+
+                    <com.firebaseexample.custom.CTextViewEB
+                        android:id="@+id/txtCenterText"
+                        style="@style/txt_000_8"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/_1sdp"
+                        android:layout_weight="1"
+                        android:gravity="start|center_vertical"
+                        android:singleLine="true" />
+
+                    <LinearLayout
+                        android:id="@+id/llBreakCheckIn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="end"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:layout_marginEnd="@dimen/_1sdp"
+                        android:gravity="center_vertical">
+
+                        <com.firebaseexample.custom.CTextViewSB
+                            style="@style/txt_000_7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_20sdp"
+                            android:text="@string/daily_check_in" />
+
+
+                        <androidx.appcompat.widget.AppCompatCheckBox
+                            android:id="@+id/checkInOutSwitch"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_4sdp"
+                            android:contentDescription="@null"
+                            android:onClick="@{(v)->topBarClickListener.onTopBarClickListener(v,@string/check_in_out_toggle)}" />
+
+                        <com.firebaseexample.custom.CTextViewSB
+                            style="@style/txt_000_7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="@string/lunch_break" />
+
+                        <androidx.appcompat.widget.AppCompatCheckBox
+                            android:id="@+id/lunchBreakSwitch"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_4sdp"
+                            android:contentDescription="@null"
+                            android:onClick="@{(v)->topBarClickListener.onTopBarClickListener(v,@string/break_toggle)}" />
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/_10sdp"
+                            android:layout_height="match_parent"
+                            android:visibility="invisible"
+                            android:layout_gravity="end"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:layout_marginEnd="@dimen/_2sdp"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_icon_ionic_md_notifications_black" />
+                    </LinearLayout>
+                </LinearLayout>
+            </FrameLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+</layout>

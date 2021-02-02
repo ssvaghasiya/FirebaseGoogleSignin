@@ -1,0 +1,52 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewClickHandler"
+            type="com.firebaseexample.ui.home.viewmodel.HomeViewModel.ViewClickHandler" />
+
+        <variable
+            name="viewModel"
+            type="com.firebaseexample.ui.home.viewmodel.HomeViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main_bg"
+        android:orientation="vertical"
+        tools:context=".ui.home.view.HomeActivity">
+
+        <include
+            android:id="@+id/topbar"
+            layout="@layout/topbar"
+            android:visibility="gone"/>
+
+        <com.firebaseexample.custom.CButtonView
+            style="@style/txt_red_13"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_for_google_btn"
+            android:onClick="@{(v)->viewClickHandler.onSignOut(v)}"
+            android:text="Signout"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:textAllCaps="false" />
+
+        <com.firebaseexample.custom.CTextViewEB
+            android:id="@+id/txtName"
+            style="@style/txt_000_15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_45sdp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+
+    </LinearLayout>
+</layout>

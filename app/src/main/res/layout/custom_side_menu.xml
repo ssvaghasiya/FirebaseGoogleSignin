@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/containerNav"
+        android:layout_width="@dimen/_240sdp"
+        android:layout_height="match_parent"
+        android:background="#0C1427"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/navHeader"
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            android:orientation="horizontal"
+            android:padding="@dimen/_10sdp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+
+                <com.firebaseexample.custom.CTextViewSB
+                    android:id="@+id/txtFullName"
+                    style="@style/txt_fff_10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLength="30"
+                    android:singleLine="true"
+                    android:text="@string/welcome" />
+
+                <com.firebaseexample.custom.CTextViewEB
+                    android:id="@+id/txtUserName"
+                    style="@style/txt_fff_12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLength="30"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/_5sdp"
+                android:layout_height="@dimen/_5sdp"
+                android:layout_gravity="center_vertical|end"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_launcher_foreground" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@color/gray_divider"
+            android:gravity="center_vertical"
+            android:orientation="vertical" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMenuList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/item_side_menu" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@color/gray_divider"
+            android:gravity="center_vertical"
+            android:orientation="vertical" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingTop="@dimen/_7sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_3sdp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <com.firebaseexample.custom.CTextViewEB
+                    style="@style/txt_gray_sales_9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLength="30"
+                    android:singleLine="true"
+                    android:text="@string/app_name" />
+
+                <com.firebaseexample.custom.CTextView
+                    style="@style/txt_gray_sales_7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:maxLength="50"
+                    android:singleLine="true"
+                    android:text="@string/copyright_2020_all_rights_reserved" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

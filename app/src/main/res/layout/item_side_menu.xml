@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="menuItem"
+            type="com.firebaseexample.apputils.MenuItem" />
+
+        <variable
+            name="clicker"
+            type="com.firebaseexample.interfaces.ClickListener" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:onClick="@{()-> clicker.onClick(menuItem)}"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgMenuIcon"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_gravity="center_vertical"
+                android:clickable="true"
+                android:focusable="true"
+                app:imageResource="@{menuItem.icon}" />
+
+            <com.firebaseexample.custom.CTextViewSB
+                android:id="@+id/tvMenuName"
+                style="@style/txt_gray_sales_9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp15"
+                android:paddingTop="@dimen/dp5"
+                android:paddingBottom="@dimen/dp5"
+                android:text="@{menuItem.name}" />
+
+        </LinearLayout>
+    </LinearLayout>
+</layout>
