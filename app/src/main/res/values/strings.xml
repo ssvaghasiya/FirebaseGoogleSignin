@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">FireBase Example</string>
-
+    <string name="facebook_app_id">2809172316023964</string>
+    <string name="fb_login_protocol_scheme">fb2809172316023964</string>
     <string name="web_client_id">1:371320757845:android:c74af14fa17b5f12e6fedc</string>
     <string name="google_maps_key" translatable="false">AIzaSyDkzVKRY-iN6sW9tLcFynJFyaVFkhaKMcM</string>
     <string name="connection_title">No internet connection</string>

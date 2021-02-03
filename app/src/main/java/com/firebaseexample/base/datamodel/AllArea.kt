@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName
 
 
 /**
- * Created by Kartum Infotech (Bhavesh Hirpara) on 11/6/2020.
  */
 class AllArea {
     @SerializedName("status_code")

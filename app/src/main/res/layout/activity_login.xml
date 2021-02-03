@@ -139,6 +139,18 @@
             android:layout_gravity="bottom|center_horizontal"
             android:textAllCaps="false" />
 
+        <com.firebaseexample.custom.CButtonView
+            android:id="@+id/facebookSignIn"
+            style="@style/txt_red_13"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_for_google_btn"
+            android:onClick="@{(v)->viewClickHandler.onFacebookLogin(v)}"
+            android:text="FaceBook"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:textAllCaps="false" />
+
 
     </LinearLayout>
 </layout>

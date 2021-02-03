@@ -5,8 +5,10 @@ import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat.startActivity
+import com.facebook.*
 import com.firebaseexample.R
 import com.firebaseexample.apputils.Debug
 import com.firebaseexample.base.viewmodel.BaseViewModel
@@ -22,6 +24,13 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
 import com.google.firebase.auth.GoogleAuthProvider
+import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 
 class LoginViewModel(application: Application) : BaseViewModel(application) {
@@ -35,6 +44,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
     private var firebaseAuth: FirebaseAuth? = null
     private var authStateListener: FirebaseAuth.AuthStateListener? = null
     private val TAG = "LoginViewModel"
+    private lateinit var callbackManager: CallbackManager
 
 
     fun setBinder(binder: ActivityLoginBinding) {
@@ -50,7 +60,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
             binder.edtUserEmail.setText("")
             binder.edtPassword.setText("")
         }
-
+        initFacebook()
         initGoogle()
     }
 
@@ -91,6 +101,12 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
         if (requestCode == RC_SIGN_IN) {
             val result: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
             handleSignInResult(result)
+        }else {
+            try {
+                callbackManager.onActivityResult(requestCode, resultCode, data)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 
@@ -161,6 +177,75 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
                 }
     }
 
+    private fun initFacebook() {
+        callbackManager = CallbackManager.Factory.create()
+    }
+
+    private fun loginFacebook() {
+        LoginManager.getInstance().logOut()
+        LoginManager.getInstance().logInWithReadPermissions(
+            mContext as Activity,
+            listOf("email", "public_profile")
+        )
+        LoginManager.getInstance().registerCallback(callbackManager,
+            object : FacebookCallback<LoginResult> {
+                override fun onSuccess(loginResult: LoginResult) {
+                    getFacebookProfile(loginResult.accessToken)
+                }
+
+                override fun onCancel() {
+                    Debug.e("Facebook", "Cancelled")
+                }
+
+                override fun onError(exception: FacebookException) {
+                    Debug.e("Facebook", "onError : " + exception.message)
+                }
+            })
+    }
+
+    private fun getFacebookProfile(accessToken: AccessToken) {
+        val request = GraphRequest.newMeRequest(accessToken) { data, response ->
+            try {
+                Debug.e("getFacebookProfile", "" + data.toString())
+//                val fbRes =
+//                    Gson().fromJson<FbRes>(data.toString(), object : TypeToken<FbRes>() {}.type)
+
+//                var providerToken = accessToken.token
+                // Do Login here
+                //          checkFacebookLogin(fbRes)
+                FirebaseMessaging.getInstance().token
+                    .addOnCompleteListener(OnCompleteListener { task ->
+                        if (!task.isSuccessful) {
+                            return@OnCompleteListener
+                        }
+                        // Get new Instance ID token
+                        val token = task.result
+//                        googleRegisterDataModel.Fname = fbRes.firstName
+//                        googleRegisterDataModel.email = fbRes.email
+//                        googleRegisterDataModel.lname = fbRes.lastName
+//                        googleRegisterDataModel.username = ""
+//                        googleRegisterDataModel.phone = ""
+//                        googleRegisterDataModel.login_provider = "facebook"
+//                        googleRegisterDataModel.provider_token = fbRes.id
+//                        googleRegisterDataModel.device_token = token
+
+                    })
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+        val parameters = Bundle()
+        parameters.putString(
+            "fields",
+            "id,name,first_name,last_name,email,picture.type(large)"
+        )
+        request.parameters = parameters
+        request.executeAsync()
+
+    }
+
+
 
     inner class ViewClickHandler {
 
@@ -176,6 +261,10 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
 
         fun onGoogleLogin(view: View) {
             doGoogleLogin()
+        }
+
+        fun onFacebookLogin(view: View) {
+            loginFacebook()
         }
 
 
