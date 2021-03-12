@@ -1,14 +1,24 @@
 package com.firebaseexample.ui.login.viewmodel
 
+import android.Manifest
 import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
-import androidx.core.content.ContextCompat.startActivity
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityCompat.requestPermissions
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.checkSelfPermission
 import com.facebook.*
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.firebaseexample.R
 import com.firebaseexample.apputils.Debug
 import com.firebaseexample.base.viewmodel.BaseViewModel
@@ -20,17 +30,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
 import com.google.firebase.auth.GoogleAuthProvider
-import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.LoginManager
-import com.facebook.login.LoginResult
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 
 
 class LoginViewModel(application: Application) : BaseViewModel(application) {
@@ -108,6 +113,9 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
                 e.printStackTrace()
             }
         }
+        if (requestCode === CAMERA_REQUEST && resultCode === Activity.RESULT_OK) {
+            binder.imageView.setImageBitmap(data?.extras?.get("data") as Bitmap)
+        }
     }
 
     private fun handleSignInResult(result: Task<GoogleSignInAccount>) {
@@ -169,7 +177,10 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
                         Debug.e(TAG, user.toString())
                     } else {
                         // If sign in fails, display a message to the user.
-                        Debug.e("signInWithCredential:failure", task.exception?.printStackTrace().toString())
+                        Debug.e(
+                            "signInWithCredential:failure",
+                            task.exception?.printStackTrace().toString()
+                        )
                         // ...
                     }
 
@@ -245,8 +256,24 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
 
     }
 
+    private val CAMERA_REQUEST = 1888
+    private val MY_CAMERA_PERMISSION_CODE = 100
 
-
+    fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == MY_CAMERA_PERMISSION_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(mContext, "camera permission granted", Toast.LENGTH_LONG).show()
+                val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                (mContext as Activity).startActivityForResult(cameraIntent, CAMERA_REQUEST)
+            } else {
+                Toast.makeText(mContext, "camera permission denied", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
     inner class ViewClickHandler {
 
         fun onSignInClick(view: View) {
@@ -267,6 +294,17 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
             loginFacebook()
         }
 
+        fun onOpenCamera(view: View) {
+            if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.CAMERA) !== PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(mContext as Activity,
+                    arrayOf<String>(Manifest.permission.CAMERA),
+                    MY_CAMERA_PERMISSION_CODE
+                )
+            } else {
+                val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                (mContext as Activity).startActivityForResult(cameraIntent, CAMERA_REQUEST)
+            }
+        }
 
     }
 

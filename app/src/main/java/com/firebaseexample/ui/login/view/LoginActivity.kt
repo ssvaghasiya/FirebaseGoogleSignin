@@ -36,4 +36,13 @@ class LoginActivity : BaseActivity() {
         } catch (e: Exception) {
         }
     }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        viewModel.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
 }

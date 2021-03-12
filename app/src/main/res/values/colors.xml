@@ -103,4 +103,11 @@
 
     <!--    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#fff</color>-->
 
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="colorYellow">#ffeb3b</color>
+    <color name="colorPurple">#9c27b0</color>
+    <color name="colorBlue">#00b0ff</color>
+
 </resources>

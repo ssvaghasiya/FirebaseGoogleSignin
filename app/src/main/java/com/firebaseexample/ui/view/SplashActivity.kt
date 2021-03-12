@@ -16,6 +16,7 @@ import com.firebaseexample.databinding.ActivitySplashBinding
 import com.firebaseexample.exceptions.networks.NoInternetException
 import com.firebaseexample.ui.home.view.HomeActivity
 import com.firebaseexample.ui.login.view.LoginActivity
+import com.firebaseexample.ui.loginmaterialui.view.LoginMaterialUIActivity
 import com.google.firebase.auth.FirebaseAuth
 import java.io.PrintWriter
 import java.io.StringWriter
@@ -42,18 +43,18 @@ class SplashActivity : BaseActivity() {
 //                finish()
 //            }
 
-            Debug.e("user",FirebaseAuth.getInstance().currentUser.toString())
-            if (FirebaseAuth.getInstance().currentUser != null) {
-                val i = Intent(activity, HomeActivity::class.java)
-                i.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(i)
-                finish()
-            } else {
+//            Debug.e("user",FirebaseAuth.getInstance().currentUser.toString())
+//            if (FirebaseAuth.getInstance().currentUser != null) {
+//                val i = Intent(activity, HomeActivity::class.java)
+//                i.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                startActivity(i)
+//                finish()
+//            } else {
                 val i = Intent(activity, LoginActivity::class.java)
                 i.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(i)
                 finish()
-            }
+//            }
         }
     }
 

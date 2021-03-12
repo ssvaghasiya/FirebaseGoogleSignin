@@ -18,8 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/main_bg"
-        android:orientation="vertical"
         android:gravity="center"
+        android:orientation="vertical"
         tools:context=".ui.login.view.LoginActivity">
 
 
@@ -39,8 +39,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="visible"
-                android:padding="@dimen/_15sdp">
+                android:padding="@dimen/_15sdp"
+                android:visibility="visible">
 
                 <com.firebaseexample.custom.CTextViewEB
                     style="@style/txt_000_15"
@@ -132,11 +132,11 @@
             style="@style/txt_red_13"
             android:layout_width="@dimen/_90sdp"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginTop="@dimen/_40sdp"
             android:background="@drawable/background_for_google_btn"
             android:onClick="@{(v)->viewClickHandler.onGoogleLogin(v)}"
             android:text="@string/google"
-            android:layout_marginTop="@dimen/_40sdp"
-            android:layout_gravity="bottom|center_horizontal"
             android:textAllCaps="false" />
 
         <com.firebaseexample.custom.CButtonView
@@ -144,12 +144,29 @@
             style="@style/txt_red_13"
             android:layout_width="@dimen/_90sdp"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginTop="@dimen/_40sdp"
             android:background="@drawable/background_for_google_btn"
             android:onClick="@{(v)->viewClickHandler.onFacebookLogin(v)}"
             android:text="FaceBook"
-            android:layout_marginTop="@dimen/_40sdp"
-            android:layout_gravity="bottom|center_horizontal"
             android:textAllCaps="false" />
+
+        <com.firebaseexample.custom.CButtonView
+            style="@style/txt_red_13"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:background="@drawable/background_for_google_btn"
+            android:onClick="@{(v)->viewClickHandler.onOpenCamera(v)}"
+            android:text="Camera"
+            android:textAllCaps="false" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="@dimen/_10sdp"/>
 
 
     </LinearLayout>

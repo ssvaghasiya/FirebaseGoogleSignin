@@ -3,8 +3,7 @@ package com.firebaseexample.apputils
 import android.text.TextUtils
 import android.util.Log
 
-object
-Debug {
+object Debug {
 
     const val DEBUG = true
     const val DEBUG_EXCEPTION = true
