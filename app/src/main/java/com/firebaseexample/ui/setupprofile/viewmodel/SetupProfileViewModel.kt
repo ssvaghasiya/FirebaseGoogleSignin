@@ -23,7 +23,7 @@ class SetupProfileViewModel(application: Application) : BaseViewModel(applicatio
 
     private lateinit var binder: ActivitySetupProfileBinding
     private lateinit var mContext: Context
-    var auth: FirebaseAuth? = null
+    var fauth: FirebaseAuth? = null
     var database: FirebaseDatabase? = null
     var storage: FirebaseStorage? = null
     var selectedImage: Uri? = null
@@ -46,7 +46,7 @@ class SetupProfileViewModel(application: Application) : BaseViewModel(applicatio
 
         database = FirebaseDatabase.getInstance()
         storage = FirebaseStorage.getInstance()
-        auth = FirebaseAuth.getInstance()
+        fauth = FirebaseAuth.getInstance()
 
         (mContext as AppCompatActivity).getSupportActionBar()?.hide()
 
@@ -94,13 +94,13 @@ class SetupProfileViewModel(application: Application) : BaseViewModel(applicatio
 
                 dialog!!.show()
                 if (selectedImage != null) {
-                    val reference = storage!!.reference.child("Profiles").child(auth!!.uid!!)
+                    val reference = storage!!.reference.child("Profiles").child(fauth!!.uid!!) 
                     reference.putFile(selectedImage!!).addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             reference.downloadUrl.addOnSuccessListener { uri ->
                                 val imageUrl = uri.toString()
-                                val uid = auth!!.uid
-                                val phone = auth!!.currentUser.phoneNumber
+                                val uid = fauth!!.uid
+                                val phone = fauth!!.currentUser.phoneNumber
                                 val name: String = binder.nameBox.getText().toString()
                                 val user = User(uid, name, phone, imageUrl)
                                 database!!.reference
@@ -120,8 +120,8 @@ class SetupProfileViewModel(application: Application) : BaseViewModel(applicatio
                         }
                     }
                 } else {
-                    val uid = auth!!.uid
-                    val phone = auth!!.currentUser.phoneNumber
+                    val uid = fauth!!.uid
+                    val phone = fauth!!.currentUser.phoneNumber
                     val user = User(uid, name, phone, "No Image")
                     database!!.reference
                         .child("users")

@@ -34,6 +34,11 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 import com.firebaseexample.R
+import com.firebaseexample.ui.MyApplication
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 
 
 open class BaseViewModel(application: Application) : AppViewModel(application) {
@@ -42,13 +47,28 @@ open class BaseViewModel(application: Application) : AppViewModel(application) {
     lateinit var customSideMenuBinding: CustomSideMenuBinding
 
 
+    val db: FirebaseFirestore?
+        get() {
+            return (getApplication() as MyApplication).db
+        }
+
+    val auth: FirebaseAuth?
+        get() {
+            return (getApplication() as MyApplication).auth
+        }
+
+    val storageRef: StorageReference?
+        get() {
+            return (getApplication() as MyApplication).storageRef
+        }
+
+    val firebaseStorage: FirebaseStorage?
+        get() {
+            return (getApplication() as MyApplication).firebaseStorage
+        }
+
     fun finishActivity(mContext: Context) {
-
-//        if (mContext is HomeActivity) {
-//
-//        } else
         (mContext as Activity).finish()
-
     }
 
     fun initDrawer(mContext: Context) {

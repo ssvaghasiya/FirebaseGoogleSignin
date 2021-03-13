@@ -19,7 +19,7 @@ class PhoneNumberViewModel(application: Application) : BaseViewModel(application
 
     private lateinit var binder: ActivityPhoneNumberBinding
     private lateinit var mContext: Context
-    var auth: FirebaseAuth? = null
+    var fauth: FirebaseAuth? = null
 
 
     fun setBinder(binder: ActivityPhoneNumberBinding) {
@@ -33,8 +33,8 @@ class PhoneNumberViewModel(application: Application) : BaseViewModel(application
 
     private fun init() {
         binder.phoneBox.setText("+917990558210")
-        auth = FirebaseAuth.getInstance()
-        if (auth!!.currentUser != null) {
+        fauth = FirebaseAuth.getInstance()
+        if (fauth!!.currentUser != null) {
             val intent = Intent(mContext, MainActivity::class.java)
             mContext.startActivity(intent)
             (mContext as Activity).finish()

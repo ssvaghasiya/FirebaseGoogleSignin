@@ -14,6 +14,7 @@
     <uses-feature android:name="android.hardware.camera" />
 
     <application
+        android:name=".ui.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -22,7 +23,10 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.chat.view.ChatActivity"></activity>
+        <activity android:name=".ui.chat.view.ChatActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustResize"/>
         <activity
             android:name=".ui.setupprofile.view.SetupProfileActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize"

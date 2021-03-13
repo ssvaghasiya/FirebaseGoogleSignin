@@ -26,7 +26,7 @@ class OTPViewModel(application: Application) : BaseViewModel(application) {
 
     private lateinit var binder: ActivityOTPBinding
     private lateinit var mContext: Context
-    var auth: FirebaseAuth? = null
+    var fauth: FirebaseAuth? = null
 
     var verificationId: String? = null
     var dialog: ProgressDialog? = null
@@ -47,7 +47,7 @@ class OTPViewModel(application: Application) : BaseViewModel(application) {
         dialog!!.setCancelable(false)
         dialog!!.show()
 
-        auth = FirebaseAuth.getInstance()
+        fauth = FirebaseAuth.getInstance()
 
         (mContext as AppCompatActivity).getSupportActionBar()?.hide()
 
@@ -55,7 +55,7 @@ class OTPViewModel(application: Application) : BaseViewModel(application) {
 
         binder.phoneLbl.setText("Verify $phoneNumber")
 
-        val options = PhoneAuthOptions.newBuilder(auth)
+        val options = PhoneAuthOptions.newBuilder(fauth)
             .setPhoneNumber(phoneNumber)
             .setTimeout(60L, TimeUnit.SECONDS)
             .setActivity(mContext as Activity)
@@ -80,7 +80,7 @@ class OTPViewModel(application: Application) : BaseViewModel(application) {
 
         binder.otpView.setOtpCompletionListener(OnOtpCompletionListener { otp ->
             val credential = PhoneAuthProvider.getCredential(verificationId, otp)
-            auth!!.signInWithCredential(credential).addOnCompleteListener { task ->
+            fauth!!.signInWithCredential(credential).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val intent = Intent(mContext, SetupProfileActivity::class.java)
                     mContext.startActivity(intent)

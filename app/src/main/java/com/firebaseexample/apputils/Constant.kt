@@ -27,6 +27,7 @@ object Constant {
     const val BREAK_TIME = "breakTime"
     const val ATTENDANCE_DATA = "attendance_data"
     const val TODAYS_VISIT = "todays_visit"
+    const val APP_GOES_FORGROUND = "app_goes_forground"
 
     const val NO_DEVICE_ID = "No DeviceId"
     const val FINISH_ACTIVITY = "finish_activity"
