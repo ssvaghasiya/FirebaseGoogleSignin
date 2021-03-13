@@ -110,4 +110,10 @@
     <color name="colorPurple">#9c27b0</color>
     <color name="colorBlue">#00b0ff</color>
 
+    <color name="grey">#E3E3E3</color>
+    <color name="green">#4CAF50</color>
+    <color name="greenDark">#28852C</color>
+    <color name="purple_500">#FF6200EE</color>
+
+
 </resources>

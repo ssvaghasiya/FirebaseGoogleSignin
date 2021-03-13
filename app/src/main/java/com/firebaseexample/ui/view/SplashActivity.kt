@@ -17,6 +17,7 @@ import com.firebaseexample.exceptions.networks.NoInternetException
 import com.firebaseexample.ui.home.view.HomeActivity
 import com.firebaseexample.ui.login.view.LoginActivity
 import com.firebaseexample.ui.loginmaterialui.view.LoginMaterialUIActivity
+import com.firebaseexample.ui.phonenumber.view.PhoneNumberActivity
 import com.google.firebase.auth.FirebaseAuth
 import java.io.PrintWriter
 import java.io.StringWriter
@@ -50,7 +51,7 @@ class SplashActivity : BaseActivity() {
 //                startActivity(i)
 //                finish()
 //            } else {
-                val i = Intent(activity, LoginActivity::class.java)
+                val i = Intent(activity, PhoneNumberActivity::class.java)
                 i.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(i)
                 finish()
