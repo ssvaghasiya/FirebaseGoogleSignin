@@ -1,5 +1,6 @@
 package com.firebaseexample.ui.setupprofile.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
@@ -12,6 +13,7 @@ import com.firebaseexample.databinding.ActivityMainBinding
 import com.firebaseexample.databinding.ActivitySetupProfileBinding
 import com.firebaseexample.ui.main.viewmodel.MainViewModel
 import com.firebaseexample.ui.setupprofile.viewmodel.SetupProfileViewModel
+import kotlinx.android.synthetic.main.demo_layout.*
 
 class SetupProfileActivity : BaseActivity() {
 
@@ -25,5 +27,10 @@ class SetupProfileActivity : BaseActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_setup_profile)
         viewModel = ViewModelProvider(activity).get(SetupProfileViewModel::class.java)
         viewModel.setBinder(binding)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        viewModel.onActivityResult(requestCode, resultCode, data)
     }
 }

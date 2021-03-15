@@ -18,6 +18,7 @@ import com.firebaseexample.ui.main.view.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import java.util.*
 
 class SetupProfileViewModel(application: Application) : BaseViewModel(application){
 
@@ -51,6 +52,31 @@ class SetupProfileViewModel(application: Application) : BaseViewModel(applicatio
         (mContext as AppCompatActivity).getSupportActionBar()?.hide()
 
 
+    }
+
+    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (data != null) {
+            if (data.data != null) {
+                val uri = data.data // filepath
+                val storage = FirebaseStorage.getInstance()
+                val time = Date().time
+                val reference = storage.reference.child("Profiles").child(time.toString() + "")
+                reference.putFile(uri!!).addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        reference.downloadUrl.addOnSuccessListener { uri ->
+                            val filePath = uri.toString()
+                            val obj = HashMap<String, Any>()
+                            obj["image"] = filePath
+                            database!!.reference.child("users")
+                                .child(FirebaseAuth.getInstance().uid!!)
+                                .updateChildren(obj).addOnSuccessListener { }
+                        }
+                    }
+                }
+                binder.imageView.setImageURI(data.data)
+                selectedImage = data.data
+            }
+        }
     }
 
 
